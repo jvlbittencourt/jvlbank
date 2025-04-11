@@ -28,13 +28,20 @@ public class ClientService {
         ClientResponseDTO clientResponse = new ClientResponseDTO();
         clientResponse.setId(clientSaved.getId());
         clientResponse.setFullName(clientSaved.getFullName());
-        client.setAddress(clientSaved.getAddress());
+        clientResponse.setAddress(clientSaved.getAddress());
 
         return clientResponse;
     }
 
-    public Optional<Client> findById(Long id){
-        return clientRepository.findById(id);
+    public Optional<ClientResponseDTO> findById(Long id){
+        return clientRepository.findById(id)
+            .map(client -> {
+                ClientResponseDTO dto = new ClientResponseDTO();
+                dto.setId(client.getId());
+                dto.setFullName(client.getFullName());
+                dto.setAddress(client.getAddress());
+                return dto;
+            });
     }
 
     public void updateAddress(Long id, String newAddress){
@@ -42,5 +49,15 @@ public class ClientService {
             client.setAddress(newAddress);
             clientRepository.save(client);
         });
+    }
+
+    public Object getAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    }
+
+    public void delete(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 }

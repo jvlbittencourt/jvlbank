@@ -1,4 +1,4 @@
-package com.jvl.jvlbank.model;
+package com.jvl.jvlbank.model.account;
 
 import java.math.BigDecimal;
 
@@ -8,21 +8,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
 @Entity
-@DiscriminatorValue("CHEKCING")
-public class CheckingAccount extends Account{
-
-    private BigDecimal overdraftLimit;
-    private BigDecimal maintenanceFee;
+@DiscriminatorValue("SAVING")
+public class SavingAccount extends Account{
+    private BigDecimal monthlyIncome;
 
     @Override
     public boolean canWithdraw(BigDecimal amount){
-        var limit = getBalance().add(overdraftLimit);
 
-        if (getBalance().compareTo(amount) >= 0 || limit.compareTo(amount) >= 0)
+        if (getBalance().compareTo(amount) >= 0)
             return true;
         return false;
     }
