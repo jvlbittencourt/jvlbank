@@ -76,7 +76,7 @@ public class ClientController {
      * Método GET sem parâmetros.
      * @return Lista de DTOs de todos os clientes 
      */
-    @GetMapping("path")
+    @GetMapping
     public ResponseEntity<List<ClientResponseDTO>> getAll() {
         return ResponseEntity.ok(clientService.getAll());
     }
